@@ -2,7 +2,7 @@
 
 #include "iw3_qlib.h"
 
-qboolean IW3_InGame( void )
+qboolean IW3::InGame( void )
 {
-	return (Q_strlen( cl->MapName ) != 0);
+	return (::Q_strlen( cl->MapName ) != 0);
 }

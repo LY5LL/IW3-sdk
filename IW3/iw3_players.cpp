@@ -4,7 +4,7 @@
 #include "iw3_client.h"
 #include "iw3_qlib.h"
 
-struct centity_t* IW3_GetCentity( int client_num )
+IW3::centity_t* IW3::GetCentity( int client_num )
 {
 	if ( client_num > cgs->MaxClients ) {
 		return nullptr;
@@ -13,42 +13,42 @@ struct centity_t* IW3_GetCentity( int client_num )
 	return &centities[client_num];
 }
 
-struct clientState_s* IW3_GetClientState( int client_num )
+IW3::clientState_s* IW3::GetClientState( int client_num )
 {
-	if ( client_num > cgs->MaxClients ) {
+	if ( client_num > IW3::cgs->MaxClients ) {
 		return nullptr;
 	}
 
-	return &cg->CurrentSnap->Clients[client_num];
+	return &IW3::cg->CurrentSnap->Clients[client_num];
 }
 
 // Not 100% sure this even works lol
-struct entityState_t* IW3_GetClientEntityState( int client_num )
+IW3::entityState_t* IW3::GetClientEntityState( int client_num )
 { 
-	if ( client_num > cgs->MaxClients ) {
+	if ( client_num > IW3::cgs->MaxClients ) {
 		return nullptr;
 	} 
-	return &IW3_GetCentity( client_num )->NextState;
+	return &IW3::GetCentity( client_num )->NextState;
 }
 
-struct clientinfo_t* IW3_GetClientInfo( int client_num )
+IW3::clientinfo_t* IW3::GetClientInfo( int client_num )
 {
-	if ( client_num > cgs->MaxClients ) {
+	if ( client_num > IW3::cgs->MaxClients ) {
 		return nullptr;
 	}
 
-	return &client_info[client_num];
+	return &IW3::client_info[client_num];
 }
 
-qboolean IW3_IsEnemy( int client_num )
+qboolean IW3::IsEnemy( int client_num )
 {
 	struct centity_t* local, *target;
 
-	local = IW3_GetCentity( cg->ClientNum );
-	target = IW3_GetCentity( client_num );
+	local = IW3::GetCentity( cg->ClientNum );
+	target = IW3::GetCentity( client_num );
 
 	if ( Q_stricmp( cgs->GameMode, "dm" ) == 0 ) {
-		return nullptr;
+		return true;
 	}
 
 	else {
@@ -56,23 +56,23 @@ qboolean IW3_IsEnemy( int client_num )
 	}
 }
 
-qboolean IW3_IsDead( int client_num )
+qboolean IW3::IsDead( int client_num )
 {
-	return (IW3_GetCentity( client_num )->CurrentState.EntityFlags & EF_DEAD);
+	return (IW3::GetCentity( client_num )->CurrentState.EntityFlags & IW3::EF_DEAD);
 }
 
-qboolean IW3_IsValid( int client_num )
+qboolean IW3::IsValid( int client_num )
 {
-	struct clientState_s* cs;
-	struct clientinfo_t* ci;
+	IW3::clientState_s* cs;
+	IW3::clientinfo_t* ci;
 
-	ci = IW3_GetClientInfo( client_num );
+	ci = IW3::GetClientInfo( client_num );
 
-	if ( Q_stricmp( cgs->GameMode, "dm" ) != 0 ) {
+	if ( Q_stricmp( IW3::cgs->GameMode, "dm" ) != 0 ) {
 
-		cs = IW3_GetClientState( client_num );
+		cs = IW3::GetClientState( client_num );
 
-		if ( cs->Team != TEAM_AXIS && cs->Team != TEAM_ALLIES ) {
+		if ( cs->Team != IW3::TEAM_AXIS && cs->Team != IW3::TEAM_ALLIES ) {
 			return false;
 		}
 	}

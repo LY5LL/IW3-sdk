@@ -5,35 +5,37 @@
 #include "iw3_client.h"
 #include "iw3_engine.h"
 
-struct cg_t* cg;
-struct cgs_t* cgs;
-struct clientActive_t* cl;
-struct centity_t* centities;
-struct clientinfo_t* client_info;
-struct kbutton_t* left_mouse, *right_mouse;
+namespace IW3 {
+	cg_t* cg;
+	cgs_t* cgs;
+	clientActive_t* cl;
+	centity_t* centities;
+	clientinfo_t* client_info;
+	kbutton_t* left_mouse, * right_mouse;
 
-EngineCall CG_Trace_call;
-EngineCall RegisterTag_call, GetTagPos_call;
+	EngineCall CG_Trace_call;
+	EngineCall RegisterTag_call, GetTagPos_call;
 
-ClientCall IN_KeyUp_call, IN_KeyDown_call;
+	ClientCall IN_KeyUp_call, IN_KeyDown_call;
+}
 
-qboolean IW3_Init( void )
+qboolean IW3::Init( void )
 {
-	cg = (struct cg_t*)(0x746338);
-	cgs = (struct cgs_t*)(0x742908);
-	cl = (struct clientActive_t*)(0xc57930);
-	centities = (struct centity_t*)(0x8472d8);
-	client_info = (struct clientinfo_t*)(0x831270);
+	IW3::cg = (IW3::cg_t*)(0x746338);
+	IW3::cgs = (IW3::cgs_t*)(0x742908);
+	IW3::cl = (IW3::clientActive_t*)(0xc57930);
+	IW3::centities = (IW3::centity_t*)(0x8472d8);
+	IW3::client_info = (IW3::clientinfo_t*)(0x831270);
 
-	left_mouse = (struct kbutton_t*)(0x8E9630);
-	right_mouse = (struct kbutton_t*)(0x8E9720);
+	IW3::left_mouse = (IW3::kbutton_t*)(0x8E9630);
+	IW3::right_mouse = (IW3::kbutton_t*)(0x8E9720);
 
-	IN_KeyUp_call = (ClientCall)(0x45ea80);
-	IN_KeyDown_call = (ClientCall)(0x45e9e0);
+	IW3::IN_KeyUp_call = (IW3::ClientCall)(0x45ea80);
+	IW3::IN_KeyDown_call = (IW3::ClientCall)(0x45e9e0);
 
-	CG_Trace_call = (EngineCall)(0x40cdd0);
-	RegisterTag_call = (EngineCall)(0x512da0);
-	GetTagPos_call = (EngineCall)(0x403180);
+	IW3::CG_Trace_call = (IW3::EngineCall)(0x40cdd0);
+	IW3::RegisterTag_call = (IW3::EngineCall)(0x512da0);
+	IW3::GetTagPos_call = (IW3::EngineCall)(0x403180);
 
 	return true;
 }

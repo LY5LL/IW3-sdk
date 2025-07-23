@@ -39,34 +39,30 @@ typedef vec_t vec3_t[3];
 typedef vec_t vec4_t[4];
 typedef vec_t vec5_t[5];
 
-extern qboolean IW3_Init( void );
+namespace IW3 {
 
-/* Typedef-ed because a lot of functions will need to be called with asm because some args are
- expected to be in registers. These variables will store the address in which we will call. */
-typedef void* EngineCall;
-typedef EngineCall ClientCall;
+        extern qboolean Init( void );
 
-struct trajectory_t {
-        int Type; 
-        int Time; 
-        int Duration; 
-        vec3_t Base; 
-        vec3_t Delta; 
-}; //Size=0x0024
+        /* Typedef-ed because a lot of functions will need to be called with asm because some args are
+         expected to be in registers. These variables will store the address in which we will call. */
+        typedef void* EngineCall;
+        typedef EngineCall ClientCall;
 
-struct cpose_t {
-        short LightingHandle;
-        unsigned char EType; 
-        unsigned char ETypeUnion; 
-        char _0x0004[0x18]; 
-        vec3_t Origin; 
-        vec3_t Angles; 
-        char _0x0034[0x30]; 
-}; //Size=0x0064
+        struct trajectory_t {
+                int Type;
+                int Time;
+                int Duration;
+                vec3_t Base;
+                vec3_t Delta;
+        }; //Size=0x0024
 
-typedef enum {
-        TRACE_HITTYPE_NONE = 0x0,
-        TRACE_HITTYPE_ENTITY = 0x1,
-        TRACE_HITTYPE_DYNENT_MODEL = 0x2,
-        TRACE_HITTYPE_DYNENT_BRUSH = 0x3,
-} TraceHitType;
+        struct cpose_t {
+                short LightingHandle;
+                unsigned char EType;
+                unsigned char ETypeUnion;
+                char _0x0004[0x18];
+                vec3_t Origin;
+                vec3_t Angles;
+                char _0x0034[0x30];
+        }; //Size=0x0064
+}

@@ -2,10 +2,14 @@
 
 #include "iw3_qlib.h"
 
-void CG_Trace( struct trace_t* result, vec3_t start, vec3_t mins, vec3_t maxs, vec3_t end, int skip_num, int mask )
-{
+namespace IW3 {
 	extern EngineCall CG_Trace_call;
+	extern EngineCall RegisterTag_call;
+	extern EngineCall GetTagPos_call;
+}
 
+void IW3::CG_Trace( struct trace_t* result, vec3_t start, vec3_t mins, vec3_t maxs, vec3_t end, int skip_num, int mask )
+{
 	__asm {
 		mov esi, 0x0078C49C
 		push mask
@@ -21,10 +25,9 @@ void CG_Trace( struct trace_t* result, vec3_t start, vec3_t mins, vec3_t maxs, v
 	}
 }
 
-tag_t IW3_RegisterTag( const char* tag )
+IW3::tag_t IW3::RegisterTag( const char* tag )
 {
-	int tag_len = Q_strlen( tag ) + 1;
-	extern EngineCall RegisterTag_call;
+	int tag_len = ::Q_strlen( tag ) + 1;
 
 	__asm {
 		push tag_len
@@ -36,13 +39,12 @@ tag_t IW3_RegisterTag( const char* tag )
 	}
 }
 
-qboolean IW3_GetTagPos( tag_t tag, int client_num, vec_t* out )
+qboolean IW3::GetTagPos( IW3::tag_t tag, int client_num, vec_t* out )
 {
-	extern EngineCall GetTagPos_call;
-	struct centity_t* centity;
+	IW3::centity_t* centity;
 	int tag32;
 
-	centity = IW3_GetCentity( client_num );
+	centity = IW3::GetCentity( client_num );
 	tag32 = tag;
 
 	__asm {
@@ -55,13 +57,13 @@ qboolean IW3_GetTagPos( tag_t tag, int client_num, vec_t* out )
 	}
 }
 
-qboolean IW3_IsVisible( vec3_t vec )
+qboolean IW3::IsVisible( vec3_t vec )
 {
-	struct trace_t t;
+	struct IW3::trace_t t;
 	vec3_t start, end, null_vec;
 
 	VectorClear( null_vec );
-	VectorCopy( cg->Refdef.ViewOffset, start );
+	VectorCopy( IW3::cg->Refdef.ViewOffset, start );
 	VectorCopy( vec, end );
 
 	CG_Trace( &t, start, null_vec, null_vec, end, cg->ClientNum, 0x803003 );

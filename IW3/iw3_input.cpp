@@ -2,24 +2,27 @@
 
 #include "iw3_client.h"
 
-extern struct kbutton_t* left_mouse, right_mouse;
-extern ClientCall IN_KeyUp_call, IN_KeyDown_call;
+namespace IW3 {
 
-struct usercmd_t* IW3_GetUserCmd( int cmd_num )
+	extern kbutton_t* left_mouse, right_mouse;
+	extern ClientCall IN_KeyUp_call, IN_KeyDown_call;
+}
+
+IW3::usercmd_t* GetUserCmd( int cmd_num )
 {
-	if ( cmd_num > IW3_CurrentCmdNumber() ) {
+	if ( cmd_num > IW3::CurrentCmdNumber() ) {
 		return nullptr;
 	}
 
-	return &cl->Commands[cmd_num & 0x7F];
+	return reinterpret_cast<IW3::usercmd_t*>(&IW3::cl->Commands[cmd_num & 0x7F]);
 }
 
-int IW3_CurrentCmdNumber( void )
+int IW3::CurrentCmdNumber( void )
 {
 	return cl->CommandNumber;
 }
 
-void IW3_LeftMouseDown( void )
+void IW3::LeftMouseDown( void )
 {
 	__asm {
 		mov esi, left_mouse
@@ -28,7 +31,7 @@ void IW3_LeftMouseDown( void )
 	}
 }
 
-void IW3_LeftMouseUp( void )
+void IW3::LeftMouseUp( void )
 {
 	__asm {
 		mov esi, left_mouse
