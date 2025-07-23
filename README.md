@@ -11,4 +11,4 @@ Before using any of the SDKs functions, you must call ```IW3_Init()```, this fun
 - Add weapon definitions and functions.
 
 # Why C?
-Since about 90% of the engine was written in C, I would prefer not to use OOP and stick with C, though it doesnt really matter as it is just personal preference.
+Since about 90% of the engine was written in C, I would prefer to stick with C, though it doesnt really matter as it is just personal preference.
