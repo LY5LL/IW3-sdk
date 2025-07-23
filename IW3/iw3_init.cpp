@@ -35,5 +35,5 @@ qboolean IW3_Init( void )
 	RegisterTag_call = (EngineCall)(0x512da0);
 	GetTagPos_call = (EngineCall)(0x403180);
 
-	return qtrue;
+	return true;
 }

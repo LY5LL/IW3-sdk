@@ -8,7 +8,7 @@ extern ClientCall IN_KeyUp_call, IN_KeyDown_call;
 struct usercmd_t* IW3_GetUserCmd( int cmd_num )
 {
 	if ( cmd_num > IW3_CurrentCmdNumber() ) {
-		return NULL;
+		return nullptr;
 	}
 
 	return &cl->Commands[cmd_num & 0x7F];

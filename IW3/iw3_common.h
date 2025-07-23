@@ -31,7 +31,7 @@
 #endif
 
 typedef unsigned char 		byte;
-typedef enum { qfalse, qtrue }	qboolean;
+typedef bool qboolean;
 
 typedef float vec_t;
 typedef vec_t vec2_t[2];

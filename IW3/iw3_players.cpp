@@ -7,7 +7,7 @@
 struct centity_t* IW3_GetCentity( int client_num )
 {
 	if ( client_num > cgs->MaxClients ) {
-		return NULL;
+		return nullptr;
 	}
 
 	return &centities[client_num];
@@ -16,7 +16,7 @@ struct centity_t* IW3_GetCentity( int client_num )
 struct clientState_s* IW3_GetClientState( int client_num )
 {
 	if ( client_num > cgs->MaxClients ) {
-		return NULL;
+		return nullptr;
 	}
 
 	return &cg->CurrentSnap->Clients[client_num];
@@ -26,7 +26,7 @@ struct clientState_s* IW3_GetClientState( int client_num )
 struct entityState_t* IW3_GetClientEntityState( int client_num )
 { 
 	if ( client_num > cgs->MaxClients ) {
-		return NULL;
+		return nullptr;
 	} 
 	return &IW3_GetCentity( client_num )->NextState;
 }
@@ -34,7 +34,7 @@ struct entityState_t* IW3_GetClientEntityState( int client_num )
 struct clientinfo_t* IW3_GetClientInfo( int client_num )
 {
 	if ( client_num > cgs->MaxClients ) {
-		return NULL;
+		return nullptr;
 	}
 
 	return &client_info[client_num];
@@ -48,7 +48,7 @@ qboolean IW3_IsEnemy( int client_num )
 	target = IW3_GetCentity( client_num );
 
 	if ( Q_stricmp( cgs->GameMode, "dm" ) == 0 ) {
-		return qtrue;
+		return nullptr;
 	}
 
 	else {
@@ -73,13 +73,13 @@ qboolean IW3_IsValid( int client_num )
 		cs = IW3_GetClientState( client_num );
 
 		if ( cs->Team != TEAM_AXIS && cs->Team != TEAM_ALLIES ) {
-			return qfalse;
+			return false;
 		}
 	}
 
 	if ( !ci->IsValid || !ci->NextValid ) {
-		return qfalse;
+		return false;
 	}
 
-	return qtrue;
+	return true;
 }
